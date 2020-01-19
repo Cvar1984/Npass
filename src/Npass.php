@@ -3,7 +3,7 @@
  * File: Npass.php
  * @author: Cvar1984 <gedzsarjuncomuniti@gmail.com>
  * Date: 19.01.2020
- * Last Modified Date: 19.01.2020
+ * Last Modified Date: 20.01.2020
  * Last Modified By: Cvar1984 <gedzsarjuncomuniti@gmail.com>
  */
 namespace Cvar1984\Npass;
@@ -39,20 +39,21 @@ class Npass implements NpassInterface
         return $this;
     }
 
-    public function findWord($word)
+    public function findWord($word, int $depth = 1)
     {
-        $ffs = new FastFuzzySearch($this->records);
-        $results = $ffs->find($word, sizeof($this->records));
+        $wordList = $this->records;
+        $ffs = new FastFuzzySearch($wordList);
+        $results = $ffs->find($word, $depth);
         foreach ($results as $key => $result) {
             if ($result['percent'] >= 1) {
-                $this->highResult .= $result['word'];
+                $this->highResult[] = $result['word'];
             } elseif ($result['percent'] >= 0.5) {
-                $this->midResult .= $result['word'];
+                $this->midResult[] = $result['word'];
             } elseif ($result['percent'] <= 0.5) {
-                $this->lowResult .= $result['word'];
+                $this->lowResult[] = $result['word'];
             }
-            return $this;
         }
+        return $this;
     }
     public function getHigh()
     {
