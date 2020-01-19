@@ -1,0 +1,22 @@
+{
+    "name": "cvar1984/npass",
+    "description": "Easy swear words fuzzy finder",
+    "type": "library",
+    "require": {
+        "mihanentalpo/fast-fuzzy-search": "0.2.*",
+        "league/csv": "9.*"
+    },
+    "license": "MIT",
+    "authors": [
+        {
+            "name": "Cvar1984",
+            "email": "gedzsarjuncomuniti@gmail.com"
+        }
+    ],
+    "minimum-stability": "stable",
+    "autoload": {
+        "psr-4": {
+            "Cvar1984\\Npass\\": "src/"
+        }
+    }
+}
