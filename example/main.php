@@ -20,22 +20,22 @@ $medium = $npass->getMid();
 $low = $npass->getLow();
 
 ob_start(); // capture the test
-if(!empty($high)) {
+if (!empty($high)) {
     echo $input . ' high similarity to swear word => ' . $high;
 }
-if(!empty($mid)) {
-    echo $input . ' medium similarity to swear word => ' . $mid; 
+if (!empty($mid)) {
+    echo $input . ' medium similarity to swear word => ' . $mid;
 }
-if(!empty($low)) {
+if (!empty($low)) {
     echo $input . ' low similarity to swear word => ' . $low;
 }
 
 $output = ob_get_clean();
 
-if(!empty($output)) { // validate test
+if (!empty($output)) {
+    // validate test
     echo $output;
-}
-else {
+} else {
     echo 'You have passed the test';
 }
 echo PHP_EOL;

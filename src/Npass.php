@@ -8,19 +8,20 @@
  */
 namespace Cvar1984\Npass;
 
-use \League\Csv\Reader;
-use \League\Csv\Statement;
-use \Mihanentalpo\FastFuzzySearch\FastFuzzySearch;
+use League\Csv\Reader;
+use League\Csv\Statement;
+use Mihanentalpo\FastFuzzySearch\FastFuzzySearch;
 
-class Npass implements NpassInterface {
-
+class Npass implements NpassInterface
+{
     private $csv;
     private $records;
     private $highResult;
     private $midResult;
     private $lowResult;
 
-    public function setDataSheet($dataSheet, $mode = 'r') {
+    public function setDataSheet($dataSheet, $mode = 'r')
+    {
         $csv = Reader::createFromPath($dataSheet, $mode);
         $this->csv = $csv->setHeaderOffset(0);
         return $this;
@@ -38,18 +39,16 @@ class Npass implements NpassInterface {
         return $this;
     }
 
-    public function findWord($word)  {
-
+    public function findWord($word)
+    {
         $ffs = new FastFuzzySearch($this->records);
         $results = $ffs->find($word, sizeof($this->records));
         foreach ($results as $key => $result) {
             if ($result['percent'] >= 1) {
                 $this->highResult .= $result['word'];
-            }
-            elseif($result['percent'] >= 0.5) {
+            } elseif ($result['percent'] >= 0.5) {
                 $this->midResult .= $result['word'];
-            }
-            elseif($result['percent'] <= 0.5) {
+            } elseif ($result['percent'] <= 0.5) {
                 $this->lowResult .= $result['word'];
             }
             return $this;
